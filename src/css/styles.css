@@ -26,6 +26,60 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.link-to-home:hover {
-  color: #747bff;
+
+form {
+  display: flex;
+  gap: 8px;
+  margin: 0 auto;
+  width: 371px;
+  padding: 36px;
+  align-items: center;
+  color: #2E2F42;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+}
+
+label {
+display: flex;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 272px;
+  height: 40px;
+  resize: none;
+  border-radius: 4px;
+  border: 1px solid #808080;
+  padding: 8px 16px;
+  font: inherit;
+  outline: none;
+  overflow: hidden;
+}
+
+textarea:hover{
+    border: 1px solid #000;
+}
+
+textarea:focus  {
+  border-color: #4E75FF;;
+}
+
+button {
+  color: #FFF;
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: 0.64px;
+  border-style: none;
+  padding: 8px 16px;
+  height: 40px;
+  border-radius: 8px;
+  background: #4E75FF;
+}
+
+button:hover,
+button:focus {
+    background: #6C8CFF;
 }

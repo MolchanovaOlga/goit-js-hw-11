@@ -26,6 +26,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/*    ----- form -----      */
 
 form {
   display: flex;
@@ -82,4 +83,28 @@ button {
 button:hover,
 button:focus {
     background: #6C8CFF;
+}
+
+/*    ----- gallery -----    */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  width: 1128px;
+  margin: 24px auto;
+}
+
+.gallery-item  {
+  width: 360px;
+  height: 200px;
+  flex-basis: calc((100% - 48px) / 3);
+}
+
+
+.gallery-image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }

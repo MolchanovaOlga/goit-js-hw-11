@@ -1,16 +1,20 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+
 import icon from './img/icons/bi_x-octagon.svg';
 
 const form = document.querySelector('form');
 const textArea = document.querySelector('textarea');
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('span');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
-
+    gallery.textContent = '';
+    
     const valueOfTextarea = textArea.value;
     fetchImages(valueOfTextarea);
 
@@ -19,6 +23,8 @@ form.addEventListener('submit', event => {
 
 
 function fetchImages(value) {
+    loader.classList.add("loader");
+    
     const searchParams = new URLSearchParams({
         key: "41764698-0ccaaf72f9cf319226b6a04c5",
         q: value,
@@ -37,14 +43,15 @@ function fetchImages(value) {
             return response.json()
         })
         .then(data => {
+            loader.classList.remove("loader");
             let arrayOfImg = data.hits;
             if (arrayOfImg.length == 0) {
                 noImages();
                 return;
-            } 
+            }
             createGallery(arrayOfImg);
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 };
 
 function noImages() {
@@ -70,6 +77,24 @@ function createGallery(arr) {
                 alt="${tags}"
             />
             </a>
+            <ul class="statistics">
+                <li class="statistics-item">
+                    <h2>Likes</h2>
+                    <p>${likes}</p>
+                </li>
+                <li class="statistics-item">
+                    <h2>Views</h2>
+                    <p>${views}</p>
+                </li>
+                <li class="statistics-item">
+                    <h2>Comments</h2>
+                    <p>${comments}</p>
+                </li>
+                <li class="statistics-item">
+                    <h2>Downloads</h2>
+                    <p>${downloads}</p>
+                </li>
+            </ul>
         </li>
         `
     }).join('');

@@ -104,6 +104,8 @@ function createGallery(arr) {
         captionsData: "alt",
         captionDelay: 250,
     });
+
+    newLightBox.refresh();
 }
 
 

@@ -13,6 +13,7 @@ const loader = document.querySelector('span');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
+    loader.classList.add("loader");
     gallery.textContent = '';
     
     const valueOfTextarea = textArea.value;
@@ -22,9 +23,7 @@ form.addEventListener('submit', event => {
 });
 
 
-function fetchImages(value) {
-    loader.classList.add("loader");
-    
+function fetchImages(value) {  
     const searchParams = new URLSearchParams({
         key: "41764698-0ccaaf72f9cf319226b6a04c5",
         q: value,
@@ -43,7 +42,6 @@ function fetchImages(value) {
             return response.json()
         })
         .then(data => {
-            loader.classList.remove("loader");
             let arrayOfImg = data.hits;
             if (arrayOfImg.length == 0) {
                 noImages();
@@ -51,12 +49,26 @@ function fetchImages(value) {
             }
             createGallery(arrayOfImg);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            errorMessage();
+        })
+        .finally(() => loader.classList.remove("loader"));
 };
 
 function noImages() {
     iziToast.error({
       message: "Sorry, there are no images matching<br/>your search query. Please try again!",
+      position: "topRight",
+      backgroundColor: "#EF4040",
+      messageColor: '#fff',
+      iconUrl: icon,
+    });
+}
+
+function errorMessage() {
+    iziToast.error({
+      message: "Sorry, an error occurred. Please try again later!",
       position: "topRight",
       backgroundColor: "#EF4040",
       messageColor: '#fff',
